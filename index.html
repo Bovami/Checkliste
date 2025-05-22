@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkliste: Gründung einer Kleidungsmarke</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #ecf0f1;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        li:hover:not(.completed) {
+            background: #e0e6e7;
+        }
+        li.completed {
+            background-color: #d4edda; /* Light green */
+            color: #155724; /* Darker green text */
+            text-decoration: line-through;
+            font-style: italic;
+        }
+        input[type="checkbox"] {
+            margin-right: 15px;
+            min-width: 20px; /* Ensure checkbox is visible */
+            min-height: 20px;
+            accent-color: #28a745; /* Green checkbox accent */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Essentiale Meilensteine für die erfolgreiche Gründung einer Kleidungsmarke</h1>
+        <p>Die Umsetzung einer eigenen Modemarke erfordert systematische Planung und strukturierte Abarbeitung zentraler Aufgabenbereiche. Nachstehende chronologische Darstellung führt durch die kritischen Phasen des Gründungsprozesses, wobei jeder Abschnitt konkrete Handlungspunkte enthält, die nach Abschluss als erledigt markiert werden können.</p>
+
+        <div id="checklist-container">
+            </div>
+    </div>
+
+    <script>
+        const checklistData = {
+            "Vorbereitungsphase: Konzeptentwicklung und Marktpositionierung": [
+                "Vision der Marke präzise formulieren und schriftlich fixieren (Alleinstellungsmerkmal, Kernwerte, ästhetisches Leitbild)",
+                "Detaillierte Marktanalyse durchführen (Wettbewerbslandschaften, Zielgruppenprofile, Preissegmente)",
+                "Erste Prototypen erstellen und in Fokusgruppen testen"
+            ],
+            "Planungsphase: Geschäftsmodell und rechtliche Grundlagen": [
+                "Umfassenden Businessplan erarbeiten (Finanzprognosen, Marketingstrategien, Produktionskalkulationen, Vertriebskonzepte)",
+                "Rechtsform wählen (Einzelunternehmen, UG, GmbH)",
+                "Gewerbeanmeldung beim zuständigen Amt durchführen",
+                "Registrierung beim Finanzamt vornehmen"
+            ],
+            "Produktentwicklung: Design und Herstellung": [
+                "Materialauswahl treffen (Nachhaltigkeit, Lieferkettenethik, Produktqualität)",
+                "Partnersuche mit zuverlässigen Produzenten oder Print-on-Demand-Dienstleistern, inkl. Musterproduktion und Qualitätskontrollen)",
+                "Gestaltung der Verpackungslösungen und Entwicklung eines konsistenten Brandings"
+            ],
+            "Vertriebsaufbau und Markteinführung": [
+                "Vertriebskanal einrichten (eigener Onlineshop, Marketplace, physische Verkaufsstellen)",
+                "Technische Implementierungen integrieren (Zahlungsgateways, Warenwirtschaftssysteme, CRM-Tools)",
+                "Marketingplan finalisieren (Social-Media-Kampagnen, Influencer-Kooperationen, Pressearbeit)",
+                "Strukturierten Launch-Plan mit definierten KPIs erstellen (Umsatzziele, Kundenakquisekosten, Retourenquote)"
+            ],
+            "Post-Launch: Optimierung und Skalierung": [
+                "Tägliche Operationen institutionalisieren (Bestellabwicklung, Kundenkommunikation, Lagerlogistik)",
+                "Regelmäßige Analysen der Verkaufsdaten, Kundenfeedbacks und Marketing-Kennzahlen durchführen",
+                "Planung saisonaler Kollektionen sowie Erschließung neuer Vertriebswege oder Zielgruppen"
+            ]
+        };
+
+        const checklistContainer = document.getElementById('checklist-container');
+        let completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || {};
+
+        function renderChecklist() {
+            checklistContainer.innerHTML = ''; // Clear existing content
+            for (const phase in checklistData) {
+                const phaseTitle = document.createElement('h2');
+                phaseTitle.textContent = phase;
+                checklistContainer.appendChild(phaseTitle);
+
+                const ul = document.createElement('ul');
+                checklistData[phase].forEach((task, index) => {
+                    const li = document.createElement('li');
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    const taskId = `${phase.replace(/\W/g, '')}-${index}`; // Unique ID for each task
+                    checkbox.id = taskId;
+                    checkbox.checked = completedTasks[taskId] || false;
+
+                    const label = document.createElement('label');
+                    label.htmlFor = taskId;
+                    label.textContent = task;
+
+                    li.appendChild(checkbox);
+                    li.appendChild(label);
+
+                    if (checkbox.checked) {
+                        li.classList.add('completed');
+                    }
+
+                    li.addEventListener('click', (event) => {
+                        // Toggle checkbox state if the click wasn't directly on the checkbox
+                        if (event.target !== checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                        }
+                        li.classList.toggle('completed', checkbox.checked);
+                        completedTasks[taskId] = checkbox.checked;
+                        localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+                    });
+
+                    ul.appendChild(li);
+                });
+                checklistContainer.appendChild(ul);
+            }
+        }
+
+        // Render the checklist when the page loads
+        document.addEventListener('DOMContentLoaded', renderChecklist);
+    </script>
+
+</body>
+</html>
