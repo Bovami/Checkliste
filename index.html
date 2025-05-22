@@ -4,61 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkliste: Gründung einer Kleidungsmarke</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-blue: #0056b3; /* A strong blue similar to BVM's branding */
+            --accent-green: #28a745; /* For completion */
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #343a40;
+            --text-color: #495057;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Open Sans', Arial, sans-serif;
             line-height: 1.6;
-            margin: 20px;
-            background-color: #f4f4f4;
-            color: #333;
+            margin: 0;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for longer content */
+            min-height: 100vh;
+            padding: 40px 20px;
+            box-sizing: border-box; /* Include padding in element's total width and height */
         }
+
         .container {
-            max-width: 800px;
-            margin: auto;
+            width: 100%;
+            max-width: 900px; /* Wider container for a more spacious feel */
             background: #fff;
-            padding: 30px;
+            padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px var(--shadow-medium);
+            margin-top: 20px; /* Small margin from top */
+            margin-bottom: 20px;
         }
+
         h1 {
-            color: #2c3e50;
+            font-size: 2.2em;
+            color: var(--primary-blue);
             text-align: center;
             margin-bottom: 30px;
+            font-weight: 600;
         }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
         h2 {
-            color: #34495e;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 30px;
+            font-size: 1.6em;
+            color: var(--dark-gray);
+            border-bottom: 2px solid var(--medium-gray);
+            padding-bottom: 12px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            font-weight: 600;
         }
+
         ul {
             list-style: none;
             padding: 0;
         }
+
         li {
-            background: #ecf0f1;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 5px;
+            background: var(--light-gray);
+            margin-bottom: 12px;
+            padding: 18px 20px;
+            border-radius: 6px;
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* Align text to top if it wraps */
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow-light);
+            border: 1px solid var(--medium-gray); /* Subtle border for definition */
+            font-size: 1.05em;
         }
+
         li:hover:not(.completed) {
-            background: #e0e6e7;
+            background: #e9f0f6; /* Lighter blue on hover */
+            box-shadow: 0 4px 15px var(--shadow-light);
         }
+
         li.completed {
-            background-color: #d4edda; /* Light green */
-            color: #155724; /* Darker green text */
+            background-color: #e6ffe6; /* Very light green for completed */
+            color: #218838; /* Slightly darker green text */
             text-decoration: line-through;
             font-style: italic;
+            border-color: var(--accent-green);
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2); /* Green shadow */
         }
+
         input[type="checkbox"] {
-            margin-right: 15px;
-            min-width: 20px; /* Ensure checkbox is visible */
-            min-height: 20px;
-            accent-color: #28a745; /* Green checkbox accent */
+            margin-right: 18px;
+            min-width: 24px; /* Larger checkbox */
+            min-height: 24px;
+            accent-color: var(--primary-blue); /* Checkbox color matching primary brand color */
+            cursor: pointer;
+            flex-shrink: 0; /* Prevent checkbox from shrinking */
+            margin-top: 2px; /* Adjust vertical alignment with text */
+        }
+
+        li.completed input[type="checkbox"] {
+            accent-color: var(--accent-green); /* Green checkbox when completed */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.4em;
+            }
+            li {
+                padding: 15px;
+                font-size: 1em;
+            }
+            input[type="checkbox"] {
+                min-width: 20px;
+                min-height: 20px;
+                margin-right: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+            .container {
+                padding: 20px 15px;
+            }
+            h1 {
+                font-size: 1.6em;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            li {
+                padding: 12px;
+            }
         }
     </style>
 </head>
